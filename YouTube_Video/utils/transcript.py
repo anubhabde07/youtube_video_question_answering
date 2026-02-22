@@ -1,6 +1,7 @@
 from serpapi import GoogleSearch
 
-def get_youtube_transcript(video_id, api_key):
+def get_youtube_transcript(video_id):
+    api_key = st.secrets["SERPAPI_KEY"]
     params = {
         "api_key": api_key,
         "engine": "youtube_video_transcript",
@@ -26,5 +27,6 @@ def get_youtube_transcript(video_id, api_key):
     except Exception as e:
         print("ERROR TYPE:", type(e))
         print("ERROR MESSAGE:", str(e))
+
 
 
