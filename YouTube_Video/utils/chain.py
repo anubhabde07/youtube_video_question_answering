@@ -41,7 +41,6 @@ Question: {question}
     llm = HuggingFaceEndpoint(
         repo_id="Qwen/Qwen2.5-72B-Instruct",
         huggingfacehub_api_token=hf_token,
-        task="text-generation",
         temperature=0.2,
         max_new_tokens=512,
     )
@@ -51,5 +50,6 @@ Question: {question}
     main_chain = parallel_chain | prompt | llm | parser
 
     return main_chain
+
 
 
