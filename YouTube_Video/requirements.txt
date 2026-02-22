@@ -5,4 +5,6 @@ langchain-community
 langchain-huggingface
 sentence-transformers
 faiss-cpu
+
 python-dotenv
+google-search-results
