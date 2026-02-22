@@ -19,5 +19,9 @@ def get_transcript(video_id: str) -> str:
 
         return " ".join(transcript_list)
 
-    except (TranscriptsDisabled, RequestBlocked, NoTranscriptFound):
-        return ""
+    # except (TranscriptsDisabled, RequestBlocked, NoTranscriptFound):
+    #     return ""
+    except Exception as e:
+        print("ERROR TYPE:", type(e))
+        print("ERROR MESSAGE:", str(e))
+
