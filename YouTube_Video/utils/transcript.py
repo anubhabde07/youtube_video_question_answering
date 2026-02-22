@@ -1,27 +1,30 @@
-from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api._errors import (
-    TranscriptsDisabled,
-    RequestBlocked,
-    NoTranscriptFound
-)
+from serpapi import GoogleSearch
 
-def get_transcript(video_id: str) -> str:
+def get_youtube_transcript(video_id, api_key):
+    params = {
+        "api_key": api_key,
+        "engine": "youtube_video_transcript",
+        "v": video_id
+    }
+
     try:
-        transcript_obj = YouTubeTranscriptApi()
-        fetched_transcript = transcript_obj.fetch(
-            video_id=video_id,
-            languages=['en']
-        )
+        search = GoogleSearch(params)
+        results = search.get_dict()
 
-        transcript_list = [
-            snippet.text for snippet in fetched_transcript.snippets
-        ]
+        if "transcript" in results:
+            # We use 'snippet' because that is the key where SerpApi stores the text
+            full_transcript = " ".join([s.get("snippet", "") for s in results["transcript"]])
+            return full_transcript
+        else:
+            print(f"Error from SerpApi: {results.get('error', 'No transcript found')}")
+            return None
 
-        return " ".join(transcript_list)
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        return None
 
-    # except (TranscriptsDisabled, RequestBlocked, NoTranscriptFound):
-    #     return ""
     except Exception as e:
         print("ERROR TYPE:", type(e))
         print("ERROR MESSAGE:", str(e))
+
 
