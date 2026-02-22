@@ -15,8 +15,9 @@ if video_url:
 if video_id:
     transcript = get_transcript(video_id)
 
-    if transcript == "":
-        st.error("Transcript not available")
+    if not transcript:
+        st.error("Transcript could not be fetched.")
+        st.stop()
     else:
         vectorStore = create_vectorstore(transcript)
         chain = build_chain(vectorStore)
@@ -25,4 +26,5 @@ if video_id:
 
         if query:
             answer = chain.invoke(query)
+
             st.write(answer)
