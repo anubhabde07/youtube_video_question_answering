@@ -1,10 +1,7 @@
 streamlit
-youtube-transcript-api
-langchain
-langchain-community
-langchain-huggingface
-sentence-transformers
+langchain>=0.1.0
+langchain-community>=0.0.30
+langchain-huggingface>=0.0.3
 faiss-cpu
 python-dotenv
 google-search-results
-torch
