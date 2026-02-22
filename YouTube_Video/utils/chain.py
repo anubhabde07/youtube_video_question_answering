@@ -5,9 +5,8 @@ from langchain_core.runnables import (
     RunnableLambda
 )
 from langchain_core.output_parsers import StrOutputParser
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_huggingface import HuggingFaceEndpoint
 import streamlit as st
-from dotenv import load_dotenv
 
 
 def build_chain(vector_store):
@@ -40,16 +39,17 @@ Question: {question}
     hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
     llm = HuggingFaceEndpoint(
-        model="Qwen/Qwen2.5-72B-Instruct",
-        huggingfacehub_api_token=hf_token
+        repo_id="Qwen/Qwen2.5-72B-Instruct",
+        huggingfacehub_api_token=hf_token,
+        task="text-generation",
+        temperature=0.2,
+        max_new_tokens=512,
     )
-
-    model = ChatHuggingFace(llm=llm)
 
     parser = StrOutputParser()
 
-    main_chain = parallel_chain | prompt | model | parser
-
+    main_chain = parallel_chain | prompt | llm | parser
 
     return main_chain
+
 
