@@ -13,7 +13,7 @@ video_id = ""
 if video_url:
     video_id += get_videoID(video_url)
 
-if video_id & api_key:
+if video_id and api_key:
     transcript = get_youtube_transcript(video_id, api_key)
 
     if not transcript:
@@ -29,4 +29,5 @@ if video_id & api_key:
             answer = chain.invoke(query)
 
             st.write(answer)
+
 
