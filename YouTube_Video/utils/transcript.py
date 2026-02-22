@@ -1,4 +1,5 @@
 from serpapi import GoogleSearch
+import streamlit as st
 
 def get_youtube_transcript(video_id):
     api_key = st.secrets["SERPAPI_KEY"]
@@ -27,6 +28,7 @@ def get_youtube_transcript(video_id):
     except Exception as e:
         print("ERROR TYPE:", type(e))
         print("ERROR MESSAGE:", str(e))
+
 
 
 
