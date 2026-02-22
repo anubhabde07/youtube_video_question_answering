@@ -7,5 +7,4 @@ sentence-transformers
 faiss-cpu
 python-dotenv
 google-search-results
-
-
+torch
