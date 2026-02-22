@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.transcript import get_transcript
+from utils.transcript import get_youtube_transcript
 from utils.vectorstore import create_vectorstore
 from utils.chain import build_chain
 from utils.url_to_id import get_videoID
@@ -29,5 +29,6 @@ if video_id and api_key:
             answer = chain.invoke(query)
 
             st.write(answer)
+
 
 
