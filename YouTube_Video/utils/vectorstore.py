@@ -1,6 +1,6 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceInferenceAPIEmbeddings
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 import streamlit as st
 
 
@@ -19,7 +19,7 @@ def create_vectorstore(transcript: str):
         api_key=hf_token,
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
-	
+
     vector_store = FAISS.from_documents(
         documents=chunks,
         embedding=embedding
