@@ -1,9 +1,12 @@
 from serpapi import GoogleSearch
+import streamlit as st
+
+SERPAPI_API_KEY = st.secrets["SERPAPI_API_KEY"]
 
 def get_transcript(video_id: str):
     try:
         params = {
-            "api_key": '1102bfb02cefcc88b1950f59bb4d8b0e16c6cd3667f3b427d42563497a9f663c',
+            "api_key": SERPAPI_API_KEY,
             'engine': 'youtube_video_transcript',
             'v': video_id
         }
@@ -16,4 +19,5 @@ def get_transcript(video_id: str):
     except Exception as e:
         print(f"Error has occured. ", e)
         return ''
+
    
