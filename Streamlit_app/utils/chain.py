@@ -6,8 +6,9 @@ from langchain_core.runnables import (
 )
 from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-from dotenv import load_dotenv
+import streamlit as st
 
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
 def build_chain(vector_store):
 
@@ -47,5 +48,6 @@ Question: {question}
     parser = StrOutputParser()
 
     main_chain = parallel_chain | prompt | model | parser
+
 
     return main_chain
