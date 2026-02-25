@@ -1,3 +1,5 @@
+import os
+import streamlit as st
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import (
     RunnableParallel,
@@ -6,7 +8,6 @@ from langchain_core.runnables import (
 )
 from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-import os
 
 
 def build_chain(vector_store):
@@ -36,20 +37,18 @@ Question: {question}
         "question": RunnablePassthrough()
     })
 
-
-
-    hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
-    os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
     llm = HuggingFaceEndpoint(
-        model="Qwen/Qwen2.5-72B-Instruct",
+        repo_id="mistralai/Mistral-7B-Instruct-v0.1",
+        temperature=0.5,
+        max_new_tokens=512
     )
 
     model = ChatHuggingFace(llm=llm)
-
     parser = StrOutputParser()
 
     main_chain = parallel_chain | prompt | model | parser
 
-
     return main_chain
+
