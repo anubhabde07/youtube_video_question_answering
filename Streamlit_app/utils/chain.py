@@ -7,6 +7,7 @@ from langchain_core.runnables import (
 from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 import streamlit as st
+import os
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
@@ -37,10 +38,11 @@ Question: {question}
         "question": RunnablePassthrough()
     })
 
-    load_dotenv()
 
     llm = HuggingFaceEndpoint(
         model="Qwen/Qwen2.5-72B-Instruct",
+        temperature=0.5,
+        max_new_tokens=512
     )
 
     model = ChatHuggingFace(llm=llm)
@@ -51,3 +53,4 @@ Question: {question}
 
 
     return main_chain
+
