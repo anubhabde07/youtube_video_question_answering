@@ -10,7 +10,7 @@ def create_vectorstore(transcript: str):
 
     chunks = splitter.create_documents([transcript])
 
-    embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", temperature=0.5)
+    embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
     vector_store = FAISS.from_documents(
 	    documents=chunks,
@@ -19,3 +19,4 @@ def create_vectorstore(transcript: str):
 
 
     return vector_store
+
