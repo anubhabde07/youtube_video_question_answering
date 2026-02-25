@@ -12,9 +12,11 @@ def create_vectorstore(transcript: str):
     chunks = splitter.create_documents([transcript])
 
     embedding = HuggingFaceEndpointEmbeddings(
-    	model_name="sentence-transformers/all-MiniLM-L6-v2",
-    	huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    	model="sentence-transformers/all-MiniLM-L6-v2",
+    	task="feature-extraction",
+    	huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"],
 	)
+	
     vector_store = FAISS.from_documents(
 	    documents=chunks,
 	    embedding=embedding
@@ -22,4 +24,5 @@ def create_vectorstore(transcript: str):
 
 
     return vector_store
+
 
