@@ -1,6 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
+import streamlit as st
 
 def create_vectorstore(transcript: str):
     splitter = RecursiveCharacterTextSplitter(
@@ -21,3 +22,4 @@ def create_vectorstore(transcript: str):
 
 
     return vector_store
+
