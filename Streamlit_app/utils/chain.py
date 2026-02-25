@@ -6,7 +6,7 @@ from langchain_core.runnables import (
 )
 from langchain_core.output_parsers import StrOutputParser
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-from dotenv import load_dotenv
+import os
 
 
 def build_chain(vector_store):
@@ -36,7 +36,10 @@ Question: {question}
         "question": RunnablePassthrough()
     })
 
-    load_dotenv()
+
+
+    hf_token = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+    os.environ["HUGGINGFACEHUB_API_TOKEN"] = hf_token
 
     llm = HuggingFaceEndpoint(
         model="Qwen/Qwen2.5-72B-Instruct",
@@ -47,5 +50,6 @@ Question: {question}
     parser = StrOutputParser()
 
     main_chain = parallel_chain | prompt | model | parser
+
 
     return main_chain
