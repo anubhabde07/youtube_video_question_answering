@@ -13,8 +13,7 @@ def create_vectorstore(transcript: str):
 
     embedding = HuggingFaceEndpointEmbeddings(
     	model="sentence-transformers/all-MiniLM-L6-v2",
-    	task="feature-extraction",
-    	huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"],
+    	huggingfacehub_api_token=st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 	)
 	
     vector_store = FAISS.from_documents(
@@ -24,5 +23,6 @@ def create_vectorstore(transcript: str):
 
 
     return vector_store
+
 
 
