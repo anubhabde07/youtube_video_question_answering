@@ -40,9 +40,7 @@ Question: {question}
 
 
     llm = HuggingFaceEndpoint(
-        model='meta-llama/Llama-2-7b-chat-hf',
-        temperature=0.5,
-        max_new_tokens=512
+        model="Qwen/Qwen2.5-72B-Instruct",
     )
 
     model = ChatHuggingFace(llm=llm)
@@ -53,6 +51,7 @@ Question: {question}
 
 
     return main_chain
+
 
 
 
