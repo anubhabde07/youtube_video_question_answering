@@ -40,7 +40,7 @@ Question: {question}
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 
     llm = HuggingFaceEndpoint(
-        repo_id="mistralai/Mistral-7B-Instruct-v0.1",
+        model="mistralai/Mistral-7B-Instruct-v0.1",
         temperature=0.5,
         max_new_tokens=512
     )
@@ -51,4 +51,5 @@ Question: {question}
     main_chain = parallel_chain | prompt | model | parser
 
     return main_chain
+
 
