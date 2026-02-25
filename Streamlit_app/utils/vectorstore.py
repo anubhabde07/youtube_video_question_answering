@@ -10,11 +10,12 @@ def create_vectorstore(transcript: str):
 
     chunks = splitter.create_documents([transcript])
 
-    embedding = HuggingFaceEmbeddings(model_name="Octen/Octen-Embedding-8B")
+    embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2", temperature=0.5)
 
     vector_store = FAISS.from_documents(
 	    documents=chunks,
 	    embedding=embedding
     )
+
 
     return vector_store
